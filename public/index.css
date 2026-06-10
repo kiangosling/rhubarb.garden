@@ -1,114 +1,68 @@
-.main-title {
-    font-weight: 900;
-    font-style: italic;
-    font-size: 2.5em;
-    margin-top: 20px;
-    overflow: hidden;
+:root {
+  --main-bg-color: #13091c;
+  --terminal-bg-color: #090909;
+  --hot-pink: #ef8eb0;
+  --light-pink: #f1c3de;
 }
 
 body {
    margin: 0;
    padding: 0; 
+   background-color: var(--main-bg-color);
 }
 
-a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they are a part of*/
+a, a:visited, a:active { /*Make all anchors the same color as text they are a part of*/
   color: inherit;
+}
+
+.ls-results {
+    column-count: auto;
+    column-width: auto;
+    column-height: 1px;
+    color: var(--hot-pink);
+    font-weight: 500;
+}
+
+a.result-link {
+    text-decoration: none;
 }
 
 .top-bar {
     display:flex;
     align-items:center;
     padding-left:1rem;
-    border-bottom:.125rem solid grey;
+    background-color: var(--hot-pink);
     min-height:2rem
 }
 
 .path {
     font-family: Hack;
-    color: #2c2c2c;
+    color: var(--terminal-bg-color);
 }
 
-#terminal {
-   background-color: #2c2c2c; 
-   font-family: Hack;
-   font-size: 13pt;
-   color: white;
-   padding: 10px;
-}
-
-.prompt {
-   color:chocolate; 
-}
-
-.terminal-text p {
-    font-family: Hack;
-}
-
-.center {
+.terminal-window {
+    background-color: #090909; 
+    font-family: monospace;
+    font-size: 13pt;
+    color: var(--light-pink);
+    padding: 10px;
     position: fixed;
     top: 50%;
     left: 50%;
-    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    border: 1px solid;
+    height: 800px;
+    width: 1000px;
 }
 
-.box {
-    width: 0%;
-    height: 0%;
-    border: 3px solid;
+.prompt::before {
+   color:#796472; 
+   content: "roots@rhubarb.garden";
 }
-
-.zoom {
-    animation-name: zoom;
-    animation-fill-mode: forwards;
-    animation-duration: 1s;
-    animation-delay: 0.4s;
-    animation-timing-function: ease;
-}
-@keyframes zoom {
-    0% {
-        height: 0px;
-        width: 0px;
-    }
-    50% {
-        height: 600px;
-        width: 0px;
-    }
-    100% {
-        height: 600px;
-        width: 1000px;
-    }
-}
-
-.terminal-container {
-    display: inline-flex;
-}
-
-.typed-text {
-    color: white;
-} 
-
-/* .command {
-    overflow: hidden;
-    white-space: normal;
-    animation: typing 2.5s steps(40, end);
-} */
-
-#ls {
-    display: inline-block;
-    overflow: hidden;
-    width: 0;
-    white-space: nowrap;
-    animation: typing 1s 2s steps(2, end) forwards; 
-}
-
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
+.prompt::after {
+   color:#ef8eb0;
+   font-weight: bold;
+   content: " $ "
 }
 
 .blink {
