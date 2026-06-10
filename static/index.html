@@ -1,17 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=480, initial-scale=1.0">
-    <title>rhubarb.garden</title>
-    <link rel="stylesheet" href="index.css">
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=480, initial-scale=1.0" />
+        <title>rhubarb.garden</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
 
-<body>
-    <div id="card" class="zoom center box">
-        <h1 class="main-title">kiki</h1>
-        <p class="subtitle">Programmer, president, father</p>
-    </div>
-    
-</body>
+    <body>
+        <div class="top-bar">
+            <div class="path">
+                <a href="/">rhubarb.garden</a>
+            </div>
+        </div>
+        <div id="terminal" class="zoom center box">
+            <div class="terminal-container">
+                <div class="typed-text">
+                    <b class="prompt"> ~ </b><span id="ls" class="command">ls</span>
+                    <div class="result appear">welcome.sh</span><br>
+                    <b class="prompt"> ~ </b><span id="./welcome.sh" class="command">./welcome.sh</span>
+                    <br>
+                    <div class="result typing">this is the welcome text!</span>
+                    <span class="cursor blink">█</span>
+                </div>
+                
+
+            </div>
+            
+        </div>
+    </body>
 </html>
