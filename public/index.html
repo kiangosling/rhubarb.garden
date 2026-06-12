@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=480, initial-scale=1.0" />
         <title>rhubarb.garden</title>
-        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="styles.css" />
     </head>
 
     <body>
@@ -12,22 +12,15 @@
             <div class="path">
                 <a href="/">rhubarb.garden</a>
             </div>
+            <div class="time"></div>
         </div>
-        <div class="terminal-window">
-            <span class="prompt"></span><span>cat headline.txt</span><br>
-            <pre id="headline">       _           _                _                         _            
-      | |         | |              | |                       | |           
-  _ __| |__  _   _| |__   __ _ _ __| |__   __ _  __ _ _ __ __| | ___ _ __  
- | '__| '_ \| | | | '_ \ / _` | '__| '_ \ / _` |/ _` | '__/ _` |/ _ \ '_ \ 
- | |  | | | | |_| | |_) | (_| | |  | |_) | (_| | (_| | | | (_| |  __/ | | |
- |_|  |_| |_|\__,_|_.__/ \__,_|_|  |_.__(_)__, |\__,_|_|  \__,_|\___|_| |_|
-                                           __/ |                           
-                                          |___/                            
-</pre>
+        <div id="terminal-window">
+            <span id="cat" class="command"></span><br>
+            <pre id="cat-response"></pre>
             <span class="prompt"></span><span>ls -a</span><br>
             <div class="ls-results">
                 <a class="result-link" href="/">.</a><br>
-                <a class="result-link" href="https://sallysbakingaddiction.com/easy-cinnamon-rolls-from-scratch/">..</a><br>
+                <a class="result-link" href="https://en.wikipedia.org/wiki/Rhubarb">..</a><br>
                 <a class="result-link" href="/headline.txt">headline.txt</a><br>
                 <span>blurb.sh</span>
                 <br>
@@ -37,5 +30,6 @@
             <span class="cursor blink">█</span>
             
         </div>
+        <script src="animation.js"></script>
     </body>
 </html>

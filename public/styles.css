@@ -1,8 +1,10 @@
 :root {
-  --main-bg-color: #13091c;
-  --terminal-bg-color: #090909;
+  --main-bg-color-old: #13091c;
+  --main-bg-color: #1c091b;
+  --terminal-bg-color: #1f1f1f;
   --hot-pink: #ef8eb0;
   --light-pink: #f1c3de;
+  --prompt-user: #796472;
 }
 
 body {
@@ -40,7 +42,7 @@ a.result-link {
     color: var(--terminal-bg-color);
 }
 
-.terminal-window {
+#terminal-window {
     background-color: #090909; 
     font-family: monospace;
     font-size: 13pt;
@@ -56,11 +58,11 @@ a.result-link {
 }
 
 .prompt::before {
-   color:#796472; 
+   color: var(--prompt-user); 
    content: "roots@rhubarb.garden";
 }
 .prompt::after {
-   color:#ef8eb0;
+   color:var(--hot-pink);
    font-weight: bold;
    content: " $ "
 }
@@ -78,3 +80,40 @@ a.result-link {
     50% { opacity: 100%;}
 }
 
+.typing-wrapper {
+    display: inline-block;
+    position: relative;
+}
+
+#cat {
+    display: inline-flex;
+    overflow: hidden;
+    white-space: nowrap;
+    width: auto;
+    border-right: 0.65em solid transparent;
+    animation: 
+        typing 1s steps(100, end) forwards,
+        blink-border 1s step-end 2;
+}
+
+#headline {
+    display: inline-flex;
+    overflow: hidden;
+    white-space: nowrap;
+    height: auto;
+    animation: 
+        printout 2s steps(4, end) forwards,
+}
+
+/*typing and printout steps + duration set in each #-id thing*/
+
+
+@keyframes blink-border {
+    50% { border-color: var(--light-pink);}
+    0% { border-color: transparent;}
+}
+
+@keyframes printout {
+    from { max-height: 0}
+    to { max-height: 100% }
+}
