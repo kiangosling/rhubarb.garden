@@ -38,7 +38,7 @@ a.result-link {
 }
 
 .path {
-    font-family: Hack;
+    font-family: monospace;
     color: var(--terminal-bg-color);
 }
 
@@ -53,8 +53,13 @@ a.result-link {
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid;
-    height: 800px;
-    width: 1000px;
+    height: 70%;
+    width: 50%;
+}
+
+#terminal-window p {
+    margin: 0;
+    display: inline-block;
 }
 
 .prompt::before {
@@ -88,12 +93,7 @@ a.result-link {
 #cat {
     display: inline-flex;
     overflow: hidden;
-    white-space: nowrap;
     width: auto;
-    border-right: 0.65em solid transparent;
-    animation: 
-        typing 1s steps(100, end) forwards,
-        blink-border 1s step-end 2;
 }
 
 #headline {

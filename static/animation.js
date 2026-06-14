@@ -10,7 +10,7 @@ const commands = [
     "./hello.sh"
 ];
 // separate line-by-line case I want to put in whole lines at once, do a typing animation, etc.
-const responses = [
+const responsesHTML = [
     ["  ┓   ┓     ┓         ┓    \n", "┏┓┣┓┓┏┣┓┏┓┏┓┣┓ ┏┓┏┓┏┓┏┫┏┓┏┓\n", "┛ ┛┗┗┻┗┛┗┻┛ ┗┛•┗┫┗┻┛ ┗┻┗ ┛┗\n", "                ┛          \n"],
     ['<a class="result-link" href="/">.</a><br>', '<a class="result-link" href="https://en.wikipedia.org/wiki/Rhubarb">..</a><br>', ],
     []
@@ -18,36 +18,23 @@ const responses = [
 const blinkingCursor = '<span class="cursor blink">█</span>'
 
 function typeText(element, text, i) {
+    // Not finished with text
     if(i < text.length) {
-        element.textContent += text.charAt(i);
+        var blinkingCursor = '<span class="cursor blink">█</span>'
+        element.innerHTML += text.charAt(i);
+        setTimeout(typeText, 50, element, text, i+1);
     }
-
-
-    
-    while(i < text.length) {
-        element.textContent += text.charAt(i);
-        i++;
-        setTimeout(function f(){return;}, 500) // Wait a few ms between letters
-    }
+    return; // Finished
 }
 
 function typeCommand(colors, element, text) {
-    // Create prompt
-    var host = document.createElement(span);
-    host.textContent = "roots@rhubarb.garden";
-    host.style.color = colors["prompt-user"];
-    var dollar = document.createElement(span);
-    dollar.textContent = " $ ";
-    dollar.style.color = colors["hot-pink"];
-
-    // Prepend and type out command
-    element.prepend(dollar);
-    dollar.prepend(host);
-    typeText(element, text, 0);
+    var prompt = `<span style="color:${colors["prompt-user"]}">roots@rhubarb.garden</span><span style="color:${colors["hot-pink"]}"> $ </span>`;
+    element.innerHTML = prompt + "█";
+    setTimeout(typeText(element, text, 0), 500);
 }
 
 // Main
 
 var currentElement = document.getElementById("cat");
-typeText(currentElement, commands[0]);
+typeCommand(colors, currentElement, commands[0]);
 
