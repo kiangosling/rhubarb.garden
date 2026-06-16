@@ -17,20 +17,42 @@ const responsesHTML = [
 ]
 const blinkingCursor = '<span class="cursor blink">█</span>'
 
-function typeText(element, text, i) {
+function typeText(parent, element, cursor, text, i) {
     // Not finished with text
     if(i < text.length) {
-        var blinkingCursor = '<span class="cursor blink">█</span>'
-        element.innerHTML += text.charAt(i);
-        setTimeout(typeText, 50, element, text, i+1);
+        element.innerText += text.charAt(i);
+        setTimeout(typeText, 50, parent, element, cursor, text, i+1);
+    } 
+    else {
+        parent.removeChild(cursor);
     }
-    return; // Finished
 }
 
 function typeCommand(colors, element, text) {
-    var prompt = `<span style="color:${colors["prompt-user"]}">roots@rhubarb.garden</span><span style="color:${colors["hot-pink"]}"> $ </span>`;
-    element.innerHTML = prompt + "█";
-    setTimeout(typeText(element, text, 0), 500);
+    // Set up separate spans within <p> for host/prompt, command, and blinking cursor
+    const promptSpan = `<span style="color:${colors["prompt-user"]}">roots@rhubarb.garden</span><span style="color:${colors["hot-pink"]}"> $ </span>`;
+    const commandSpan = document.createElement('span');
+    const cursorSpan = document.createElement('span');
+    cursorSpan.className = 'cursor';
+    cursorSpan.textContent = '█';
+    element.innerHTML = promptSpan;
+    element.appendChild(commandSpan);
+    element.appendChild(cursorSpan);
+    setTimeout(typeText(element, commandSpan, cursorSpan, text, 0), 500);
+}
+
+function printLines(colors, element, responseHTML, lineno) {
+    // assert that it is a array
+    if(!(Array.isArray(responseHTML))) {
+        console.log("Need to give multiple lines to printLines");
+        return;
+    }
+    
+    // Print lines
+    if(lineno < responseHTML.length) {
+        element.innerText += responseHTML[lineno];
+        setTimeout(printLines(colors, element, responseHTML, lineno + 1), 500);
+    }
 }
 
 // Main
@@ -38,3 +60,5 @@ function typeCommand(colors, element, text) {
 var currentElement = document.getElementById("cat");
 typeCommand(colors, currentElement, commands[0]);
 
+currentElement = document.getElementById("cat-response");
+printLines(colors, currentElement, responsesHTML[0], 0);
