@@ -5,7 +5,7 @@ const colors = {
 }
 const prompt = `<span style="color:${colors["prompt-user"]}">roots@rhubarb.garden</span><span style="color:${colors["hot-pink"]}"> $ </span>`;
 const commands = [
-    "cat headline.txt",
+    "neofetch",
     "ls -a",
     "./hello.sh"
 ];
@@ -17,28 +17,28 @@ const responsesHTML = [
 ]
 const blinkingCursor = '<span class="cursor blink">█</span>'
 
-function typeText(parent, element, cursor, text, i) {
+function typeText(parent, element, cursor, text, i, delayBeforeExecute) {
     // Not finished with text
     if(i < text.length) {
         element.innerText += text.charAt(i);
         setTimeout(typeText, 50, parent, element, cursor, text, i+1);
     } 
     else {
-        parent.removeChild(cursor);
+        setTimeout(() => parent.removeChild(cursor), 500);
     }
 }
 
-function typeCommand(colors, element, text) {
+function typeCommand(colors, element, text, delayBeforeStart) {
     // Set up separate spans within <p> for host/prompt, command, and blinking cursor
     const promptSpan = `<span style="color:${colors["prompt-user"]}">roots@rhubarb.garden</span><span style="color:${colors["hot-pink"]}"> $ </span>`;
     const commandSpan = document.createElement('span');
     const cursorSpan = document.createElement('span');
-    cursorSpan.className = 'cursor';
+    cursorSpan.className = 'cursor blink';
     cursorSpan.textContent = '█';
     element.innerHTML = promptSpan;
     element.appendChild(commandSpan);
     element.appendChild(cursorSpan);
-    setTimeout(typeText(element, commandSpan, cursorSpan, text, 0), 500);
+    setTimeout(typeText, delayBeforeStart, element, commandSpan, cursorSpan, text, 0, 1000);
 }
 
 function printLines(colors, element, responseHTML, lineno) {
@@ -58,7 +58,7 @@ function printLines(colors, element, responseHTML, lineno) {
 // Main
 
 var currentElement = document.getElementById("cat");
-typeCommand(colors, currentElement, commands[0]);
+typeCommand(colors, currentElement, commands[0], 400);
 
-currentElement = document.getElementById("cat-response");
-printLines(colors, currentElement, responsesHTML[0], 0);
+currentElement = document.getElementById("pretty-title");
+//printLines(colors, currentElement, responsesHTML[0], 0);

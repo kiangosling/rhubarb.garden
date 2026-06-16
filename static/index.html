@@ -16,18 +16,20 @@
         </div>
         <div id="terminal-window">
             <p id="cat" class="command"></p>
-            <pre id="cat-response"></pre>
-            <p id="ls" class="command">ls -a</p>
-            <div class="ls-results">
-                <a class="result-link" href="/">.</a><br>
-                <a class="result-link" href="https://en.wikipedia.org/wiki/Rhubarb">..</a><br>
-                <a class="result-link" href="/headline.txt">headline.txt</a><br>
-                <span>blurb.sh</span>
-                <br>
+            <div class="welcome-box">
+                <div class="wb-title">info</div>
+                <pre id="pretty-title" class="flicker" style="animation-delay: 1.8s">  ┓   ┓     ┓         ┓    
+┏┓┣┓┓┏┣┓┏┓┏┓┣┓ ┏┓┏┓┏┓┏┫┏┓┏┓
+┛ ┛┗┗┻┗┛┗┻┛ ┗┛•┗┫┗┻┛ ┗┻┗ ┛┗
+                ┛          </pre>
+                <div class="wb-divider flicker" style="animation-delay: 2s"><div class="wb-divider-text">options</div></div>
+                <div class="links">
+                    <div class="links-column">
+                        <div class="links-entry"></div>
+                        <div class="links-entry"></div>
+                    </div>
+                </div>
             </div>
-            <span class="prompt"></span><span>./blurb.sh</span><br>
-            <span class="typewriter">Long long long text...</span>
-            <span class="cursor blink">█</span>
             
         </div>
         <script src="animation.js"></script>

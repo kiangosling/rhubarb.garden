@@ -1,8 +1,0 @@
-
-  ┓   ┓     ┓         ┓    
-┏┓┣┓┓┏┣┓┏┓┏┓┣┓ ┏┓┏┓┏┓┏┫┏┓┏┓
-┛ ┛┗┗┻┗┛┗┻┛ ┗┛•┗┫┗┻┛ ┗┻┗ ┛┗
-                ┛          
-
-
-(thanks to this website: https://patorjk.com/software/taag/)

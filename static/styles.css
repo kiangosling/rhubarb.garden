@@ -5,6 +5,7 @@
   --hot-pink: #ef8eb0;
   --light-pink: #f1c3de;
   --prompt-user: #796472;
+  --terminal-bg-color: #090909;
 }
 
 body {
@@ -15,14 +16,6 @@ body {
 
 a, a:visited, a:active { /*Make all anchors the same color as text they are a part of*/
   color: inherit;
-}
-
-.ls-results {
-    column-count: auto;
-    column-width: auto;
-    column-height: 1px;
-    color: var(--hot-pink);
-    font-weight: 500;
 }
 
 a.result-link {
@@ -53,8 +46,8 @@ a.result-link {
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid;
-    height: 70%;
-    width: 50%;
+    height: 75%;
+    width: 70%;
 }
 
 #terminal-window p {
@@ -85,9 +78,18 @@ a.result-link {
     50% { opacity: 100%;}
 }
 
-.typing-wrapper {
-    display: inline-block;
-    position: relative;
+.flicker {
+    opacity: 0%;
+    animation-name: flicker;
+    animation-fill-mode: forwards;
+    animation-duration: 0.2s;
+    animation-timing-function: step-end;
+}
+@keyframes flicker {
+    0% { opacity: 0%; }
+    20% { opacity: 100%; }
+    25% { opacity: 0%; }
+    100% { opacity: 100%; }
 }
 
 #cat {
@@ -96,22 +98,51 @@ a.result-link {
     width: auto;
 }
 
-#headline {
-    display: inline-flex;
-    overflow: hidden;
-    white-space: nowrap;
-    height: auto;
-    animation: 
-        printout 2s steps(4, end) forwards,
+.welcome-box {
+    width: auto;
+    height: 0px;
+    opacity: 0;
+    border: 1px solid #747f8d;
+    position: relative;
+    padding: 1.0rem 0.8rem 0.6rem 0.8rem;
+    top: 1.2em;
+    animation: 0.7s ease 1.5s forwards wb-drop;
+}
+
+@keyframes wb-drop {
+    0% { opacity: 0; height: 0%}
+    100% { opacity: 1; height: 400px;}
+}
+
+.wb-title {
+    position: absolute;
+    top: -0.7em;
+    left: 0.6rem;
+    background: var(--terminal-bg-color);
+    padding: 0 0.4rem;
+}
+
+.wb-divider {
+    grid-column: 1 / -1;
+    position: relative;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+    border-top: 1px solid #444;
+}
+
+.wb-divider-text {
+    position: absolute;
+    top: -0.8em;
+    padding-right: 0.4rem;
+    padding-left: 0.2rem;
+    background-color: var(--terminal-bg-color);
+}
+
+.links-column {
+
 }
 
 /*typing and printout steps + duration set in each #-id thing*/
-
-
-@keyframes blink-border {
-    50% { border-color: var(--light-pink);}
-    0% { border-color: transparent;}
-}
 
 @keyframes printout {
     from { max-height: 0}
