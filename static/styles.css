@@ -155,13 +155,9 @@ a.result-link {
     background-color: var(--terminal-bg-color);
 }
 
-.links-column {
-
-}
-
-/*typing and printout steps + duration set in each #-id thing*/
-
-@keyframes printout {
-    from { max-height: 0}
-    to { max-height: 100% }
+#links-columns {
+    max-height: 5em;
+    column-fill: auto;
+    column-width: auto;
+    column-count: 3;
 }
