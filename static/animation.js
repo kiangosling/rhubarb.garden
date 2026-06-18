@@ -5,7 +5,7 @@ const colors = {
 }
 const prompt = `<span style="color:${colors["prompt-user"]}">roots@rhubarb.garden</span><span style="color:${colors["hot-pink"]}"> $ </span>`;
 const commands = [
-    "neofetch",
+    "rhubarbfetch",
     "ls -a",
     "./hello.sh"
 ];

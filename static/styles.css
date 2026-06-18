@@ -100,7 +100,7 @@ a.result-link {
 
 .welcome-box {
     width: auto;
-    height: 0px;
+    max-height: 400px;
     opacity: 0;
     border: 1px solid #747f8d;
     position: relative;
@@ -156,8 +156,30 @@ a.result-link {
 }
 
 #links-columns {
-    max-height: 5em;
-    column-fill: auto;
+    height: 200px;    
+    column-fill: balance;
     column-width: auto;
     column-count: 3;
+    padding-top: 2em;
+    font-size: 14pt;
+}
+
+#links-columns ul {
+    margin-top: 0;
+    padding-top: 0;
+    list-style-type: none;
+}
+
+#links-columns li {
+  margin-bottom: 50px;
+}
+
+#links-columns a {
+    color: var(--hot-pink);
+    background-color: var(--terminal-bg-color);
+}
+
+#links-columns a:hover {
+    color: var(--terminal-bg-color);
+    background-color: var(--hot-pink);
 }
