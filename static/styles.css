@@ -48,6 +48,7 @@ a.result-link {
     border: 1px solid;
     height: 75%;
     width: 70%;
+    max-width: 1000px;
 }
 
 #terminal-window p {
@@ -68,8 +69,7 @@ a.result-link {
 .blink {
     animation-name: blink;
     animation-fill-mode: forwards;
-    animation-duration: 1s;
-    animation-delay: 0.4s;
+    animation-duration: 0.5s;
     animation-iteration-count: infinite;
     animation-timing-function: step-end;
 }
@@ -87,7 +87,7 @@ a.result-link {
 }
 @keyframes flicker {
     0% { opacity: 0%; }
-    20% { opacity: 100%; }
+    18% { opacity: 100%; } /*Sometimes flicker is not visible, maybe browser lag or monitor response time?*/
     25% { opacity: 0%; }
     100% { opacity: 100%; }
 }
@@ -106,7 +106,7 @@ a.result-link {
     position: relative;
     padding: 1.0rem 0.8rem 0.6rem 0.8rem;
     top: 1.2em;
-    animation: 0.7s ease 1.5s forwards wb-drop;
+    animation: 0.7s ease forwards wb-drop;
 }
 
 @keyframes wb-drop {
@@ -120,6 +120,23 @@ a.result-link {
     left: 0.6rem;
     background: var(--terminal-bg-color);
     padding: 0 0.4rem;
+}
+
+#wb-first-segment {
+    display: flex;
+}
+
+#pretty-title-left {
+    color: var(--hot-pink);
+    padding-right: 2em;
+    padding-left: 0.5em;
+}
+
+#first-segment-text {
+    flex: 1;
+    vertical-align:top;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .wb-divider {

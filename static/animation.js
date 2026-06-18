@@ -24,7 +24,8 @@ function typeText(parent, element, cursor, text, i, delayBeforeExecute) {
         setTimeout(typeText, 50, parent, element, cursor, text, i+1);
     } 
     else {
-        setTimeout(() => parent.removeChild(cursor), 500);
+        // setTimeout(() => parent.removeChild(cursor), delayBeforeExecute);
+        parent.removeChild(cursor)
     }
 }
 
@@ -33,12 +34,12 @@ function typeCommand(colors, element, text, delayBeforeStart) {
     const promptSpan = `<span style="color:${colors["prompt-user"]}">roots@rhubarb.garden</span><span style="color:${colors["hot-pink"]}"> $ </span>`;
     const commandSpan = document.createElement('span');
     const cursorSpan = document.createElement('span');
-    cursorSpan.className = 'cursor blink';
+    cursorSpan.className = 'cursor';
     cursorSpan.textContent = '█';
     element.innerHTML = promptSpan;
     element.appendChild(commandSpan);
     element.appendChild(cursorSpan);
-    setTimeout(typeText, delayBeforeStart, element, commandSpan, cursorSpan, text, 0, 1000);
+    setTimeout(typeText, delayBeforeStart, element, commandSpan, cursorSpan, text, 0, 500);
 }
 
 function printLines(colors, element, responseHTML, lineno) {
