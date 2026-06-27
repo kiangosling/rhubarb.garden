@@ -22,14 +22,6 @@
   font-weight: bold;
 }
 
-.main-title {
-    font-weight: 900;
-    font-style: italic;
-    font-size: 2.5em;
-    margin-top: 20px;
-    overflow: hidden;
-}
-
 body {
    margin: 0px auto;
    max-width: 800px;
@@ -45,27 +37,104 @@ a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they
     display:flex;
     align-items:center;
     padding: 0.5rem;
-    font-size: 11pt;
-    border-bottom:.125rem solid var(--fg);
+    margin-top: 1rem;
+    font-size: 12pt;
+    border-bottom:0.150rem solid var(--fg);
     min-height:2rem
 }
 
-.path {
-    font-family: monospace;
-    color: #2c2c2c;
+.main-title {
+    font-family: "ETBook";
+    font-size: 20pt;
+    color: rgb(154, 0, 0);
+    font-weight: bold;
 }
 
-.path a {
+.main-title a {
     text-decoration: none;
 }
 
-.path a:hover {
+.nav-tree-box {
+    position: relative;
+    border: 1px solid var(--fg);
+    width: auto;
+    height: auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    font-family: monospace;
+    font-size: 11pt;
+}
+
+.box-title {
+    position: absolute;
+    top: -0.7em;
+    left: 0.6rem;
+    background: var(--bg);
+    padding: 0 0.4rem;
+    font-style: italic;
+}
+
+.nav-tree {
+    display: flex;
+}
+
+.nav-tree ul {
+    list-style-type: none;
+    padding: 0 5rem 0 0;
+    width: fit-content;
+    line-height: 140%;
+}
+
+.nav-tree li:not(.root)::before {
+    content: '';
+    position: absolute;
+    left: -0.5rem;      /* Shift border left */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--fg);
+}
+
+.nav-tree li.first, li.last {
+    position: relative;
+}
+
+.nav-tree li.first::before {
+    top: 0.6rem;
+}
+
+.nav-tree li.last::before {
+    bottom: 0.6rem;
+}
+
+.nav-tree a {
+    text-decoration: none;
+    padding: 0.2rem;
+}
+
+.nav-tree a:hover {
     color: var(--bg);
     background-color: var(--fg);
 }
 
-path.leaf a {
-    text-decoration: inherit;
-    color: var(--bg);
-    background-color: var(--fg);
+.nav-tree li.path-step, li.cwd{
+    display: inline-block;
+    position: relative;
+    font-weight: bold;
+}
+
+
+.nav-tree li.path-step::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 5rem;
+    background: var(--fg);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.text-content {
+    line-height: 150%;
 }
