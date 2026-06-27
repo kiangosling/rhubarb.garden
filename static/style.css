@@ -1,3 +1,10 @@
+:root { 
+    --fg: #303030; 
+    --bg: #f0eedc; 
+    --link-local: #bccabb; 
+    --link-hover: var(--fg); 
+}
+
 .main-title {
     font-weight: 900;
     font-style: italic;
@@ -7,8 +14,10 @@
 }
 
 body {
-   margin: 0;
-   padding: 0; 
+   margin: 10px auto;
+   max-width: 800px;
+   background-color: var(--bg);
+   font-size: 11pt;
 }
 
 a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they are a part of*/
@@ -19,13 +28,17 @@ a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they
     display:flex;
     align-items:center;
     padding-left:1rem;
-    border-bottom:.125rem solid grey;
+    border-bottom:.125rem solid var(--fg);
     min-height:2rem
 }
 
 .path {
-    font-family: Hack;
+    font-family: monospace;
     color: #2c2c2c;
+}
+
+.path a {
+    
 }
 
 #terminal {
