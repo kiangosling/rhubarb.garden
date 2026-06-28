@@ -1,8 +1,11 @@
 :root { 
+    /* colors */
     --fg: #303030; 
     --bg: #f0eedc; 
-    --link-local: #bccabb; 
-    --link-hover: var(--fg); 
+    --red: #9a0000;
+
+    /* widths */
+    --column-padding: 5rem;
 }
 
 @font-face {
@@ -29,6 +32,10 @@ body {
    font-size: 13pt;
 }
 
+.center {
+    justify-content: center;
+}
+
 a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they are a part of*/
   color: inherit;
 }
@@ -46,7 +53,7 @@ a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they
 .main-title {
     font-family: "ETBook";
     font-size: 20pt;
-    color: rgb(154, 0, 0);
+    color: var(--red);
     font-weight: bold;
 }
 
@@ -59,8 +66,8 @@ a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they
     border: 1px solid var(--fg);
     width: auto;
     height: auto;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
     padding: 1rem;
     font-family: monospace;
     font-size: 11pt;
@@ -79,62 +86,122 @@ a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they
     display: flex;
 }
 
+/* Make sure that the ul is as wide as the widest content inside. */
 .nav-tree ul {
+    position: relative;
     list-style-type: none;
-    padding: 0 5rem 0 0;
+    padding: 0 var(--column-padding) 0 0;
     width: fit-content;
+    height: fit-content;
     line-height: 140%;
 }
 
-.nav-tree li:not(.root)::before {
+/* This adds a vertical line for each level of tree structure, except root */
+.nav-tree ul:not(.root-ul)::before {
     content: '';
     position: absolute;
-    left: -0.5rem;      /* Shift border left */
+    left: -0.5rem;      
     top: 0;
     bottom: 0;
     width: 1px;
     background: var(--fg);
-}
-
-.nav-tree li.first, li.last {
-    position: relative;
-}
-
-.nav-tree li.first::before {
     top: 0.6rem;
-}
-
-.nav-tree li.last::before {
     bottom: 0.6rem;
 }
 
-.nav-tree a {
-    text-decoration: none;
-    padding: 0.2rem;
-}
-
-.nav-tree a:hover {
-    color: var(--bg);
-    background-color: var(--fg);
-}
-
-.nav-tree li.path-step, li.cwd{
-    display: inline-block;
-    position: relative;
-    font-weight: bold;
-}
-
-
-.nav-tree li.path-step::after {
-    content: '';
+/* This creates a little horizontal line from each node to the vertical line to the left of the column */
+.nav-tree li:not(.root)::before {
+    content: "";
     position: absolute;
+    left: -0.5rem;
     height: 1px;
-    width: 5rem;
+    width: 0.5rem;
     background: var(--fg);
     top: 50%;
     transform: translateY(-50%);
 }
 
+/* Styling for tree links (relative pos important for connecting lines) */
+.nav-tree a {
+    position: relative;
+    text-decoration: none;
+    padding: 0.2rem;
+}
+
+/* Invert colors on hover */
+.nav-tree a:hover {
+    color: var(--bg);
+    background-color: var(--fg);
+}
+
+/* This makes each list element the same size. */
+.nav-tree li {
+    width: 100%;
+    position: relative;
+}
+
+/* Styling for path nodes */
+.nav-tree li.path-node, .nav-tree li.cwd{
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* this draws a line from the right edge of the <a> tag to the connecting line below */
+.nav-tree li.path-node a::after {
+    content: '';
+    position: absolute;
+    left: 100%; 
+    height: 1px;
+    width: var(--column-padding);
+    background: var(--fg);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* this draws a line from the right side of the <li> tag, which connects to the line from the 
+<a> tag on the left and to the next layer of the tree on the right. This is done using 2 
+lines to account for variable text widths.*/
+.nav-tree li.path-node::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    height: 1px;
+    width: var(--column-padding);
+    background: var(--fg);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Styling for Fließtext */
 .text-content {
     line-height: 150%;
+    font-family: "ETBook";
+}
+
+.text-content a {
+    color: var(--red);
+}
+
+/* Drop cap/initial */
+p.drop-cap:first-child:first-letter {
+  color: var(--red);
+  float: left;
+  font-size: 60px;
+  line-height: 20px;
+  padding-top: 7px;
+  padding-right: 4px;
+}
+
+/* wine red emphasis */
+.red-em {
+    color: var(--red);
+    font-weight: bold;
+}
+
+.dinkus {
+    display: block;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: smaller;
+    text-align: center;
 }
