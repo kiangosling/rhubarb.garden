@@ -1,9 +1,10 @@
 ---
-title: photos
+title: words
 draft: false
 menus:
     main:
         parent: root
+        weight: 2
 ---
 
-photos index
+blog index

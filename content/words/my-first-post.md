@@ -3,7 +3,7 @@ draft: false
 title: My First Post
 menus:
     main:
-        parent: blog
+        parent: words
 ---
 
 ### BLah lah blah h3

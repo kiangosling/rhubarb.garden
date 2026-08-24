@@ -3,7 +3,7 @@ draft: false
 title: My Second Post
 menus:
     main:
-        parent: blog
+        parent: words
 ---
 
 ### blogpost2
