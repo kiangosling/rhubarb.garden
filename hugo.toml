@@ -1,3 +1,4 @@
-baseURL = 'https://rhubarb.garden/'
+baseURL = ''
 locale = 'en-us'
-title = 'Kian Gosling personal website'
+title = 'rhubarb.garden'
+theme = 'bookish'

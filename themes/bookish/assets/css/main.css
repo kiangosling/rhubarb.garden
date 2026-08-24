@@ -10,18 +10,18 @@
 
 @font-face {
   font-family: "ETBook"; 
-  src: url(../assets/fonts/et-book/et-book-roman-line-figures.ttf); 
+  src: url(../fonts/et-book/et-book-roman-line-figures.ttf); 
 }
 
 @font-face {
   font-family: "ETBook"; 
-  src: url(../assets/fonts/et-book/et-book-display-italic-old-style-figures.ttf); 
+  src: url(../fonts/et-book/et-book-display-italic-old-style-figures.ttf); 
   font-style: italic;
 }
 
 @font-face {
   font-family: "ETBook"; 
-  src: url(../assets/fonts/et-book/et-book-bold-line-figures.ttf); 
+  src: url(../fonts/et-book/et-book-bold-line-figures.ttf); 
   font-weight: bold;
 }
 
@@ -146,8 +146,8 @@ a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they
     font-style: italic;
 }
 
-/* this draws a line from the right edge of the <a> tag to the connecting line below */
-.nav-tree li.path-node a::after {
+/* this draws a line from the right edge of the <a> tag to the connecting line made by the css below. Unless it's a leaf node in the path. */
+.nav-tree li.path-node:not(.leaf) a::after {
     content: '';
     position: absolute;
     left: 100%; 
@@ -159,9 +159,9 @@ a, a:visited, a:hover, a:active { /*Make all anchors the same color as text they
 }
 
 /* this draws a line from the right side of the <li> tag, which connects to the line from the 
-<a> tag on the left and to the next layer of the tree on the right. This is done using 2 
-lines to account for variable text widths.*/
-.nav-tree li.path-node::after {
+<a> tag on the left and to the next layer of the tree on the right. Unless it's a leaf node 
+in the path.This is done using 2 lines to account for variable text widths.*/
+.nav-tree li.path-node:not(.leaf)::after {
     content: '';
     position: absolute;
     left: 100%;

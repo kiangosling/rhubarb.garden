@@ -1,0 +1,156 @@
+{{- /*
+Renders the tree of contents.
+
+@context {page} page The current page.
+@context {string} menuID "main".
+
+@example: {{ partial "toc.html" (dict "menuID" "main" "page" .) }}
+*/}}
+
+<div class="nav-tree-box">
+    <div class="box-title">tree of contents</div>
+    <nav class="nav-tree">
+        <ul class="root-ul">
+            <li class="path-node root"><a href="/">root</a></li>
+        </ul>
+        <ul>
+            <li class="first"><a href="/">about</a></li>
+            <li><a href="/">code</a></li>
+            <li><a href="/">photography</a></li>
+            <li><a href="/">words</a></li>
+            <li><a href="/">contact</a></li>
+            <li class="last"><a href="/">credits</a></li>
+        </ul>
+    </nav>
+</div>
+
+
+
+{{- $page := .page }}
+{{- $menuID := .menuID }} {{/* just "main", passed when we call this template in header.html */}}
+
+<div class="nav-tree-box">
+    <div class="box-title">tree of contents</div>
+    <nav class="nav-tree">
+      {{/* Root of tree */}}
+      {{- with index site.Menus $menuID }} {{/* If menu exists */}}
+        {{/* pass currentpage.page as page and currentpage as menuentries? */}}
+        {{- partial "toc-walk.html" (dict "page" $page "menuEntries" . "root" true) }}
+      {{- end }}
+    </nav>
+</div>
+
+
+
+
+
+
+{{- define "partials/toc-walk.html" }}
+  <ul>
+    {{- $page := .page }}
+    {{- $pathnode := dict }} {{/* Call again with this menuentry's children */}}
+    {{- range .menuEntries }}
+      {{- $a_attrs := dict "class" ""}}
+      {{- $li_attrs := dict "class" ""}}
+
+      {{/* Is in path? (ancestor or current) */}}
+      {{- if or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .)}} {{/*imc = menuEntry matches current page, hmc = menu entry matches child of current page, ih = is /*/}}
+        {{- $a_attrs = merge $a_attrs (dict "class" "path-node") }} 
+        {{- $li_attrs = merge $li_attrs (dict "class" "path-node") }} 
+        {{- $pathnode = .}}
+      {{- end }}
+
+      {{/* Is root node? */}}
+      {{ if (not .Parent)}}
+        {{- $a_attrs = merge $a_attrs (dict "href" "/")}}
+        {{$li_attrs = merge $li_attrs (dict "class" (print $li_attrs.class " root"))}}
+      {{ else }}
+        {{- $a_attrs = merge $a_attrs (dict "href" .URL) }}
+      {{ end }}
+
+      {{/* Is leaf node? */}}
+      {{- if (not .HasChildren)}}
+        {{$a_attrs = merge $a_attrs (dict "class" (print $a_attrs.class " leaf"))}}
+        {{$li_attrs = merge $li_attrs (dict "class" (print $li_attrs.class " leaf"))}}
+      {{- end }}
+
+      {{/* Create <li> and <a> tags for node, add attrs */}}
+      {{- $name := .Name }}
+      <li
+        {{- range $a, $b := $li_attrs }}
+          {{- with $b }}
+            {{- printf " %s=%q" $a $b | safeHTMLAttr }}
+          {{- end }}
+        {{- end -}}>
+        <a
+          {{- range $k, $v := $a_attrs }}
+            {{- with $v }}
+              {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+            {{- end }}
+          {{- end -}}
+        >{{ $name }}</a>
+      </li>
+    {{- end }}
+  </ul>
+  
+  {{/* children */}}
+  {{- if $pathnode }}
+    {{- if $pathnode.Children }}
+      {{- with $pathnode.Children }}
+        <ul>
+          {{- partial "toc-walk.html" (dict "page" $page "menuEntries" .) }}
+        </ul>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+
+{{- end }}
+
+
+
+
+
+
+
+{{- $page := .page }}
+{{- $menuID := .menuID }}
+
+{{- with index site.Menus $menuID }}
+  <nav>
+    <ul>
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+    </ul>
+  </nav>
+{{- end }}
+
+{{- define "_partials/inline/menu/walk.html" }}
+  {{- $page := .page }}
+  {{- range .menuEntries }}
+    {{- $attrs := dict "href" .URL }}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
+    {{- else if $page.HasMenuCurrent .Menu .}}
+      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+    {{- end }}
+    {{- $name := .Name }}
+    {{- with .Identifier }}
+      {{- with T . }}
+        {{- $name = . }}
+      {{- end }}
+    {{- end }}
+    <li>
+      <a
+        {{- range $k, $v := $attrs }}
+          {{- with $v }}
+            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+          {{- end }}
+        {{- end -}}
+      >{{ $name }}</a>
+      {{- with .Children }}
+        <ul>
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+        </ul>
+      {{- end }}
+    </li>
+  {{- end }}
+{{- end }}
